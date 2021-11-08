@@ -31,6 +31,8 @@ void DoTimeMeasurements(); // Wykonywanie pomiarów czasowych wykonania algorytm
 
 int main()
 {
+    cout << "Rozpoczeto dzialanie programu.\n";
+
     // Zapis rezultatów wyszukiwania par liczb spełniających podany warunek ze zbioru 10 losowych liczb całkowitych z przedziału 1-20.
     SaveResultsToFile("results.txt", FindPairOfNumbers(GenerateRandomNumbers(1, 20, 10), 5));
 
@@ -46,6 +48,8 @@ int main()
     // Pomiary czasowe potrzebne do wykresu
     // DoTimeMeasurements();
 
+    cout << "Zakonczono dzialanie programu. Rezultaty wyszukiwania znajdziesz w utworzonych plikach tekstowych.\n";
+
     return 0;
 }
 
@@ -55,8 +59,10 @@ vector<int> LoadNumbersFromFile(string fileName)
 
     ifstream file(fileName, fstream::in);
 
-    if (file.good())
+    if (file.good()) // W przypadku, gdy plik nie istnieje, program może przestać się wykonywać.
     {
+        // Wczytywanie danych z pliku za pomocą pętli while.
+
         int i;
         while (!(file.eof()))
         {
@@ -113,7 +119,8 @@ map<int, int> FindPairOfNumbers(vector<int> array, int diff)
     {
         for (auto x : array)
         {
-            if (diff == abs(i - x) && (x - i) != diff)
+            // Sprawdzanie różnicy pary - jeśli różnica jest równa podanej wartości, para jest dodawana do mapy.
+            if (diff == abs(i - x) && (x - i) != diff) // abs - funkcja zwracająca wartość bezwzględną liczby.
             {
                 foundPairs[i] = x;
             }
@@ -127,7 +134,7 @@ int GetRandomNumber(int min, int max)
 {
     static bool firstExecution = true;
 
-    if (firstExecution)
+    if (firstExecution) // Punkt startowy dla mechanizmu generującego liczby pseudolosowe ustawiamy tylko raz.
     {
         srand((unsigned int)time(NULL));
         firstExecution = false;
