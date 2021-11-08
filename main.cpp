@@ -17,7 +17,7 @@
 #include <fstream>
 #include <conio.h>
 #include <iostream>
-#include <windows.h>
+#include <time.h>
 
 using namespace std;
 
@@ -46,7 +46,7 @@ int main()
     SaveResultsToFile("results4.txt", FindPairOfNumbers({1, 5, 2, 2, 2, 5, 5, 4}, 3));
 
     // Pomiary czasowe potrzebne do wykresu
-    // DoTimeMeasurements();
+    DoTimeMeasurements();
 
     cout << "Zakonczono dzialanie programu. Rezultaty wyszukiwania znajdziesz w utworzonych plikach tekstowych.\n";
 
@@ -145,21 +145,21 @@ int GetRandomNumber(int min, int max)
 
 void DoTimeMeasurements()
 {
-    DWORD time;
+    clock_t time;
 
     fstream file;
     file.open("measurements.txt", ios::out);
 
-    #define checkTime(elements); \
-        time = GetTickCount(); \
+    #define CheckTime(elements); \
+        time = clock(); \
         FindPairOfNumbers(GenerateRandomNumbers(1, 500, elements), 10); \
-        file << "Czas wykonania algorytmu dla " << elements << " elementów wynosi " << (GetTickCount() - time) << " ms.\n";
+        file << "Czas wykonania algorytmu dla " << elements << " elementów wynosi ~" << (float)time / CLOCKS_PER_SEC << " s.\n";
 
-    checkTime(1000);
-    checkTime(5000);
-    checkTime(10000);
-    checkTime(50000);
-    checkTime(100000);
+    CheckTime(1000);
+    CheckTime(5000);
+    CheckTime(10000);
+    // CheckTime(50000);
+    // CheckTime(100000);
 
     file.close();
 }
