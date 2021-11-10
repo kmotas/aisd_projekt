@@ -3,4 +3,5 @@
 *.layout
 *.depend
 *.txt
+*.docx
 !numbers.txt
