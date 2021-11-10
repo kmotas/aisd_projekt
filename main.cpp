@@ -11,13 +11,10 @@
 
 #include <map>
 #include <vector>
-#include <cstdlib>
-#include <time.h>
-#include <stdlib.h>
-#include <fstream>
-#include <conio.h>
-#include <iostream>
-#include <time.h>
+#include <cstdlib> // rand, srand, abs
+#include <time.h> // clock
+#include <fstream> // funkcje do obsługi plików tekstowych
+#include <iostream> // cout
 
 using namespace std;
 
