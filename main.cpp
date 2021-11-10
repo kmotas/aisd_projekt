@@ -1,4 +1,4 @@
-﻿/*
+/*
     Dla zadanej tablicy liczb całkowitych znajdź te pary, których różnica jest równa zadanej liczbie k.
 
     Przykład:
@@ -61,7 +61,7 @@ vector<int> LoadNumbersFromFile(string fileName)
         // Wczytywanie danych z pliku za pomocą pętli while.
 
         int i;
-        while (!(file.eof()))
+        while (!file.eof())
         {
             file >> i;
             loadedNumbers.push_back(i);
@@ -137,7 +137,7 @@ int GetRandomNumber(int min, int max)
         firstExecution = false;
     }
 
-    return min + rand() % ((max + 1) - min);
+    return min + rand() % (max + 1 - min);
 }
 
 void DoTimeMeasurements()
@@ -147,16 +147,14 @@ void DoTimeMeasurements()
     fstream file;
     file.open("measurements.txt", ios::out);
 
-    #define CheckTime(elements); \
-        time = clock(); \
-        FindPairOfNumbers(GenerateRandomNumbers(1, 500, elements), 10); \
-        file << "Czas wykonania algorytmu dla " << elements << " elementów wynosi ~" << (float)time / CLOCKS_PER_SEC << " s.\n";
+    for (int i = 1, elements = 100; i < 9; i++)
+    {
+        time = clock();
+        FindPairOfNumbers(GenerateRandomNumbers(1, 500, elements), 10);
 
-    CheckTime(1000);
-    CheckTime(5000);
-    CheckTime(10000);
-    // CheckTime(50000);
-    // CheckTime(100000);
+        file << "Czas wykonania funkcji \"FindPairOfNumbers\" dla " << elements << " elementów wynosi ~" << (float)(clock() - time) / CLOCKS_PER_SEC << " s.\n";
+        elements *= 2;
+    }
 
     file.close();
 }
