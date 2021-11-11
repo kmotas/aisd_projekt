@@ -42,9 +42,6 @@ int main()
     // Jak wyżej, tylko dane wejściowe z treści zadania.
     SaveResultsToFile("results4.txt", FindPairOfNumbers({1, 5, 2, 2, 2, 5, 5, 4}, 3));
 
-    // Pomiary czasowe potrzebne do wykresu
-    DoTimeMeasurements();
-
     cout << "Zakonczono dzialanie programu. Rezultaty wyszukiwania znajdziesz w utworzonych plikach tekstowych.\n";
 
     return 0;
@@ -138,23 +135,4 @@ int GetRandomNumber(int min, int max)
     }
 
     return min + rand() % (max + 1 - min);
-}
-
-void DoTimeMeasurements()
-{
-    clock_t time;
-
-    fstream file;
-    file.open("measurements.txt", ios::out);
-
-    for (int i = 1, elements = 100; i < 9; i++)
-    {
-        time = clock();
-        FindPairOfNumbers(GenerateRandomNumbers(1, 500, elements), 10);
-
-        file << "Czas wykonania funkcji \"FindPairOfNumbers\" dla " << elements << " elementów wynosi ~" << (float)(clock() - time) / CLOCKS_PER_SEC << " s.\n";
-        elements *= 2;
-    }
-
-    file.close();
 }
