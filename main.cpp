@@ -82,7 +82,7 @@ void SaveResultsToFile(string fileName, map<int, int> array)
     {
         for (auto const& i : array)
         {
-            file << "[" << i.second << "," << i.first << "]\n";
+            file << "[" << i.second << "," << i.first << "] ";
         }
     }
     else
@@ -109,9 +109,9 @@ map<int, int> FindPairOfNumbers(vector<int> array, int diff)
 {
     map<int, int> foundPairs;
 
-    for (auto i : array)
+    for (int i : array)
     {
-        for (auto x : array)
+        for (int x : array)
         {
             // Sprawdzanie różnicy pary - jeśli różnica jest równa podanej wartości, para jest dodawana do mapy.
             if (diff == abs(i - x) && (x - i) != diff) // abs - funkcja zwracająca wartość bezwzględną liczby.
